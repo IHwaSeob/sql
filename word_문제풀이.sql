@@ -206,20 +206,26 @@ from country;
 --3
 --두 개의 입력값 (시작값, 마지막 값)을 받아 두입력값 범위 사이의 숫자를 순차적으로 더하는 스토어드 프로시저 작성
 
+delimiter $$
 
-DELIMITER $$
-CREATE PROCEDURE doit_sum(IN start INT, IN end INT)
+CREATE PROCEDURE doit_sum(IN p_start INT, IN p_end INT)
 BEGIN
     DECLARE tot INT DEFAULT 0;
-    WHILE start <= end DO
-        SET tot = tot + start;
-        SET start = start + 1;
+    DECLARE i INT;
+
+    SET i = p_start;
+
+    WHILE i <= p_end DO
+        SET tot = tot + i;
+        SET i = i + 1;
     END WHILE;
+
     SELECT tot;
 END $$
-DELIMITER ;
 
--- call doit_sum(0,10);
+delimiter ;
+
+call doit_sum(0,10);
 
 
 --4
